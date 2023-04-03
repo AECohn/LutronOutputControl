@@ -1,0 +1,35 @@
+//Programmer: Aviv Cohn
+
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+#User_SimplSharp_Library "LutronOutputControl"
+
+String_Input LoadName[255], Path[255];
+String_Output Command;
+Digital_Input OpenShade, CloseShade, init;
+
+
+Push Init
+
+{
+    LutronOutput.GetLoadDictionary(path);
+}
+
+Push OpenShade
+	{
+       
+Command = LutronOutput.Close(LoadName);
+
+	}
+
+Push CloseShade
+	{
+       Command = LutronOutput.Open(LoadName);
+	}
+
+
+
+
+
