@@ -4,29 +4,46 @@
 #ENABLE_STACK_CHECKING
 #ENABLE_TRACE
 
-#User_SimplSharp_Library "LutronOutputControl"
+#User_SimplSharp_Library "Collections"
 
-String_Input LoadName[255], Path[255];
-String_Output Command;
-Digital_Input OpenShade, CloseShade, init;
+String_Input LoadName[255];
+String_Output Command,  ShadeNames[21], ShadeNamesFull[21];
+Digital_Input Init, OpenShade[21], CloseShade[21];
 
-
+Utilities File;
+Dictionary Shades;
 Push Init
 
 {
-    LutronOutput.GetLoadDictionary(path);
+
+string UserPath[255], retrievedShadeName[255], temp[255];
+integer i;
+
+UserPath = File.GetFormattedUserDirectory()+"\\Shades";
+
+    Shades.Recall(UserPath);
+
+	for(i = 1 to 21)
+		{
+		 retrievedShadeName = Shades.GetKeyIndex(i); 
+         ShadeNamesFull[i] = retrievedShadeName;
+		 temp = Remove(".", retrievedShadeName);
+		 ShadeNames[i] = retrievedShadeName;
+		} 
 }
 
 Push OpenShade
 	{
-       
-Command = LutronOutput.Close(LoadName);
-
+	
+       integer i;
+		
+MakeString(Command, "#OUTPUT,%s,3", Shades.GetValueIndex(getlastmodifiedarrayindex()));
 	}
 
 Push CloseShade
 	{
-       Command = LutronOutput.Open(LoadName);
+       MakeString(Command, "#OUTPUT,%s,2", Shades.GetValueIndex(getlastmodifiedarrayindex()));
+
 	}
 
 

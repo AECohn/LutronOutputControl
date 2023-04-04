@@ -1,0 +1,23 @@
+{
+  "Library.SouthSheer": "189",
+  "Library.SouthBlackout": "187",
+  "Library.EastSheer": "183",
+  "Library.EastBlackout": "185",
+  "Boardroom.SouthSheer1": "219",
+  "Boardroom.SouthBlackout1": "221",
+  "Boardroom.SouthSheer2": "223",
+  "Boardroom.SouthBlackout2": "225",
+  "Boardroom.EastSheer": "227",
+  "Boardroom.EastBlackout": "229",
+  "Bar.ShadeEast6": "191",
+  "Bar.ShadeEast5": "193",
+  "Bar.ShadeEast4": "205",
+  "Bar.ShadeEast3": "195",
+  "Bar.ShadeEast2": "197",
+  "Bar.ShadeEast1": "203",
+  "Bar.ShadeNorth4": "199",
+  "Bar.ShadeNorth3": "201",
+  "Bar.GameRoomNorth2": "207",
+  "Bar.GameRoomNorth1": "209",
+  "Bar.Cognac": "181"
+}
