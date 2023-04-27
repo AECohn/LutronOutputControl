@@ -1,0 +1,74 @@
+//Programmer: Aviv Cohn DGI
+
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+                                     
+#SYMBOL_NAME "SimpleTCP"
+#User_SimplSharp_Library "TCPCLient"
+
+String_Input Address[65534], TX[65534];
+String_Output RX;
+Analog_Input PortNumber;
+Digital_Input Connect, Poll;
+Digital_Output Connected;
+String_Output Status;
+
+TcpConnection myConnection;
+
+Push Connect
+{
+    myConnection.Connect(Address, PortNumber);
+}
+
+Release Connect
+{
+ 	myConnection.Disconnect();
+}
+
+Push Poll
+{
+ myConnection.ConnectionPollStart(1000);
+
+}
+
+Release Poll
+{
+ myConnection.ConnectionPollStop();
+}
+
+Change TX
+{
+    myConnection.Write(TX);
+}
+
+eventhandler ReceivedData(TcpConnection sender, SendArgs args)
+{
+  	RX = args.Data;
+}
+
+eventhandler ConnectionFeedback(TcpConnection sender, SendArgs args)
+{
+	if(args.Data = "Connected")
+	{
+     Connected = 1;
+	}
+	else if(args.Data = "Could not Connect")
+	{
+        Connected = 0;
+	}
+	Status = args.Data;
+}
+
+eventhandler ErrorStatus(TcpConnection sender, SendArgs args)
+{
+		Status = args.Data;
+}
+
+
+function main()
+{
+ 	RegisterEvent(myConnection, DataReceived, ReceivedData);
+	RegisterEvent(myConnection, ConnectionStatus, ConnectionFeedback);
+	RegisterEvent(myConnection, Error, ErrorStatus);
+}	

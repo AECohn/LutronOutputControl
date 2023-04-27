@@ -6,7 +6,7 @@
 
 #User_SimplSharp_Library "Collections"
 
-String_Input LoadName[255];
+
 String_Output Command,  ShadeNames[21], ShadeNamesFull[21];
 Digital_Input Init, OpenShade[21], CloseShade[21];
 
@@ -37,12 +37,12 @@ Push OpenShade
 	
        integer i;
 		
-MakeString(Command, "#OUTPUT,%s,3", Shades.GetValueIndex(getlastmodifiedarrayindex()));
+MakeString(Command, "#OUTPUT,%s,2\n", Shades.GetValueIndex(getlastmodifiedarrayindex()));
 	}
 
 Push CloseShade
 	{
-       MakeString(Command, "#OUTPUT,%s,2", Shades.GetValueIndex(getlastmodifiedarrayindex()));
+       MakeString(Command, "#OUTPUT,%s,3\n", Shades.GetValueIndex(getlastmodifiedarrayindex()));
 
 	}
 
